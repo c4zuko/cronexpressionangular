@@ -1,3 +1,5 @@
+// Karma configuration
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -17,16 +19,22 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
--    browsers: ['Chrome'],
-+    browsers: ['ChromeHeadlessCustom'],
-+    customLaunchers: {
-+      ChromeHeadlessCustom: {
-+        base: 'ChromeHeadless',
-+        flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage']
-+      }
-+    },
--    singleRun: false,
-+    singleRun: true,
+    browsers: ['ChromeHeadlessCustom'],
+    customLaunchers: {
+      ChromeHeadlessCustom: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--disable-setuid-sandbox',
+          '--no-first-run',
+          '--no-zygote',
+          '--single-process'
+        ]
+      }
+    },
+    singleRun: true,
     restartOnFileChange: true
   });
 };
